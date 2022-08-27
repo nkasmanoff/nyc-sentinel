@@ -1,0 +1,12 @@
+folium
+ipykernel
+pip-chill
+geopandas
+pyvis
+seaborn
+sentinelsat
+torch
+torchvision
+wandb
+GDAL==2.1.0
+rasterio==0.36.0
