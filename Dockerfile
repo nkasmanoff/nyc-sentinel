@@ -25,6 +25,6 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 
 
 WORKDIR /home/noah/nyc-sentinel
-COPY . /home/noah/nyc-sentinel/
+COPY requirements.txt /home/noah/nyc-sentinel/
 
 RUN pip install -r requirements.txt
