@@ -10,10 +10,5 @@ torchvision
 pytorch-lightning
 scikit-learn
 wandb
-<<<<<<< HEAD
 GDAL==2.1.0
 rasterio==1.0.28
-=======
-GDAL
-rasterio
->>>>>>> 92ca8097f39d238b8c7d85a21bb22b0405e646f2
