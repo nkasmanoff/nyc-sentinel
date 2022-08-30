@@ -1,0 +1,88 @@
+GPU available: True, used: False
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+/usr/local/lib/python3.6/dist-packages/pytorch_lightning/trainer/trainer.py:1585: UserWarning: GPU available but not used. Set the gpus flag in your trainer `Trainer(gpus=1)` or script `--gpus=1`.
+  "GPU available but not used. Set the gpus flag in your trainer `Trainer(gpus=1)` or script `--gpus=1`."
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 76678.32it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 80955.49it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 82548.79it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 77715.47it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 82875.00it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 82646.38it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 82321.96it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 81206.27it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 79861.08it/s]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████| 100/100 [00:00<00:00, 86320.31it/s]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/usr/local/lib/python3.6/dist-packages/pytorch_lightning/loggers/wandb.py:342: UserWarning: There is a wandb run already in progress and newly created instances of `WandbLogger` will reuse this run. If this is not desired, call `wandb.finish()` before instantiating `WandbLogger`.
+  "There is a wandb run already in progress and newly created instances of `WandbLogger` will reuse"
+  | Name  | Type   | Params
+---------------------------------
+0 | model | ResNet | 11.2 M
+---------------------------------
+11.2 M    Trainable params
+0         Non-trainable params
+11.2 M    Total params
+44.788    Total estimated model params size (MB)
+Traceback (most recent call last):
+  File "trainer.py", line 138, in <module>
+    main()
+  File "trainer.py", line 132, in main
+    trainer.fit(landclassifier)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/trainer/trainer.py", line 741, in fit
+    self._fit_impl, model, train_dataloaders, val_dataloaders, datamodule, ckpt_path
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/trainer/trainer.py", line 685, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/trainer/trainer.py", line 777, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/trainer/trainer.py", line 1199, in _run
+    self._dispatch()
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/trainer/trainer.py", line 1279, in _dispatch
+    self.training_type_plugin.start_training(self)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/plugins/training_type/training_type_plugin.py", line 202, in start_training
+    self._results = trainer.run_stage()
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/trainer/trainer.py", line 1289, in run_stage
+    return self._run_train()
+Validation sanity check:   0%|                                                                                                 | 0/2 [00:00<?, ?it/s]
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/trainer/trainer.py", line 1311, in _run_train
+    self._run_sanity_check(self.lightning_module)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/trainer/trainer.py", line 1375, in _run_sanity_check
+    self._evaluation_loop.run()
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/loops/base.py", line 145, in run
+    self.advance(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/loops/dataloader/evaluation_loop.py", line 110, in advance
+    dl_outputs = self.epoch_loop.run(dataloader, dataloader_idx, dl_max_batches, self.num_dataloaders)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/loops/base.py", line 140, in run
+    self.on_run_start(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/loops/epoch/evaluation_epoch_loop.py", line 86, in on_run_start
+    self._dataloader_iter = _update_dataloader_iter(data_fetcher, self.batch_progress.current.ready)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/loops/utilities.py", line 121, in _update_dataloader_iter
+    dataloader_iter = enumerate(data_fetcher, batch_idx)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/utilities/fetching.py", line 199, in __iter__
+    self.prefetching(self.prefetch_batches)
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/utilities/fetching.py", line 258, in prefetching
+    self._fetch_next_batch()
+  File "/usr/local/lib/python3.6/dist-packages/pytorch_lightning/utilities/fetching.py", line 300, in _fetch_next_batch
+    batch = next(self.dataloader_iter)
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 521, in __next__
+    data = self._next_data()
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 1203, in _next_data
+    return self._process_data(data)
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/dataloader.py", line 1229, in _process_data
+    data.reraise()
+  File "/usr/local/lib/python3.6/dist-packages/torch/_utils.py", line 425, in reraise
+    raise self.exc_type(msg)
+UnboundLocalError: Caught UnboundLocalError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/worker.py", line 287, in _worker_loop
+    data = fetcher.fetch(index)
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/usr/local/lib/python3.6/dist-packages/torch/utils/data/_utils/fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/noah/nyc-sentinel/src/load_data.py", line 48, in __getitem__
+    img = preprocess(img)
+UnboundLocalError: local variable 'img' referenced before assignment

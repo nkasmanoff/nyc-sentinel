@@ -21,8 +21,8 @@ RUN apt-get install -y libgdal-dev
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
 
-
-
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 
 WORKDIR /home/noah/nyc-sentinel
 COPY requirements.txt /home/noah/nyc-sentinel/

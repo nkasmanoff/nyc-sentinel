@@ -1,0 +1,24 @@
+{
+    "os": "Linux-4.9.253-tegra-aarch64-with-Ubuntu-18.04-bionic",
+    "python": "3.6.9",
+    "heartbeatAt": "2022-08-30T00:45:42.828864",
+    "startedAt": "2022-08-30T00:45:42.115866",
+    "docker": null,
+    "cpu_count": 4,
+    "cuda": "10.2.300",
+    "args": [
+        "--gpus=1"
+    ],
+    "state": "running",
+    "program": "trainer.py",
+    "codePath": "src/trainer.py",
+    "git": {
+        "remote": "https://github.com/nkasmanoff/nyc-sentinel.git",
+        "commit": null
+    },
+    "email": null,
+    "root": "/home/noah/nyc-sentinel",
+    "host": "noah-desktop",
+    "username": "root",
+    "executable": "/usr/bin/python"
+}

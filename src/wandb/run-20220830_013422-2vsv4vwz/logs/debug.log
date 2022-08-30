@@ -1,0 +1,26 @@
+2022-08-30 01:34:22,747 INFO    MainThread:1339 [wandb_setup.py:_flush():76] Configure stats pid to 1339
+2022-08-30 01:34:22,748 INFO    MainThread:1339 [wandb_setup.py:_flush():76] Loading settings from /root/.config/wandb/settings
+2022-08-30 01:34:22,748 INFO    MainThread:1339 [wandb_setup.py:_flush():76] Loading settings from /home/noah/nyc-sentinel/src/wandb/settings
+2022-08-30 01:34:22,748 INFO    MainThread:1339 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'_require_service': 'True'}
+2022-08-30 01:34:22,748 INFO    MainThread:1339 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'src/trainer.py', 'program': 'trainer.py'}
+2022-08-30 01:34:22,749 INFO    MainThread:1339 [wandb_init.py:_log_setup():461] Logging user logs to /home/noah/nyc-sentinel/src/wandb/run-20220830_013422-2vsv4vwz/logs/debug.log
+2022-08-30 01:34:22,749 INFO    MainThread:1339 [wandb_init.py:_log_setup():462] Logging internal logs to /home/noah/nyc-sentinel/src/wandb/run-20220830_013422-2vsv4vwz/logs/debug-internal.log
+2022-08-30 01:34:22,749 INFO    MainThread:1339 [wandb_init.py:init():495] calling init triggers
+2022-08-30 01:34:22,749 INFO    MainThread:1339 [wandb_init.py:init():499] wandb.init called with sweep_config: {}
+config: {}
+2022-08-30 01:34:22,750 INFO    MainThread:1339 [wandb_init.py:init():548] starting backend
+2022-08-30 01:34:22,750 INFO    MainThread:1339 [wandb_init.py:init():552] setting up manager
+2022-08-30 01:34:22,819 INFO    MainThread:1339 [backend.py:_multiprocessing_setup():99] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2022-08-30 01:34:22,829 INFO    MainThread:1339 [wandb_init.py:init():558] backend started and connected
+2022-08-30 01:34:22,835 INFO    MainThread:1339 [wandb_init.py:init():636] updated telemetry
+2022-08-30 01:34:22,881 INFO    MainThread:1339 [wandb_init.py:init():668] communicating run to backend with 30 second timeout
+2022-08-30 01:34:23,219 INFO    MainThread:1339 [wandb_run.py:_on_init():1982] communicating current version
+2022-08-30 01:34:23,362 INFO    MainThread:1339 [wandb_run.py:_on_init():1986] got version response 
+2022-08-30 01:34:23,362 INFO    MainThread:1339 [wandb_init.py:init():700] starting run threads in backend
+2022-08-30 01:34:24,007 INFO    MainThread:1339 [wandb_run.py:_console_start():1962] atexit reg
+2022-08-30 01:34:24,007 INFO    MainThread:1339 [wandb_run.py:_redirect():1820] redirect: SettingsConsole.WRAP_RAW
+2022-08-30 01:34:24,013 INFO    MainThread:1339 [wandb_run.py:_redirect():1885] Wrapping output streams.
+2022-08-30 01:34:24,014 INFO    MainThread:1339 [wandb_run.py:_redirect():1907] Redirects installed.
+2022-08-30 01:34:24,017 INFO    MainThread:1339 [wandb_init.py:init():732] run started, returning control to user process
+2022-08-30 01:36:11,234 INFO    MainThread:1339 [wandb_run.py:_config_callback():1152] config_cb None None {'args/logger': True, 'args/checkpoint_callback': 'None', 'args/enable_checkpointing': True, 'args/default_root_dir': 'None', 'args/gradient_clip_val': 'None', 'args/gradient_clip_algorithm': 'None', 'args/process_position': 0, 'args/num_nodes': 1, 'args/num_processes': 1, 'args/devices': 'None', 'args/gpus': 1, 'args/auto_select_gpus': False, 'args/tpu_cores': 'None', 'args/ipus': 'None', 'args/log_gpu_memory': 'None', 'args/progress_bar_refresh_rate': 'None', 'args/enable_progress_bar': True, 'args/overfit_batches': 0.0, 'args/track_grad_norm': -1, 'args/check_val_every_n_epoch': 1, 'args/fast_dev_run': False, 'args/accumulate_grad_batches': 'None', 'args/max_epochs': 'None', 'args/min_epochs': 'None', 'args/max_steps': -1, 'args/min_steps': 'None', 'args/max_time': 'None', 'args/limit_train_batches': 1.0, 'args/limit_val_batches': 1.0, 'args/limit_test_batches': 1.0, 'args/limit_predict_batches': 1.0, 'args/val_check_interval': 1.0, 'args/flush_logs_every_n_steps': 'None', 'args/log_every_n_steps': 50, 'args/accelerator': 'None', 'args/strategy': 'None', 'args/sync_batchnorm': False, 'args/precision': 32, 'args/enable_model_summary': True, 'args/weights_summary': 'top', 'args/weights_save_path': 'None', 'args/num_sanity_val_steps': 2, 'args/resume_from_checkpoint': 'None', 'args/profiler': 'None', 'args/benchmark': False, 'args/deterministic': False, 'args/reload_dataloaders_every_n_epochs': 0, 'args/reload_dataloaders_every_epoch': False, 'args/auto_lr_find': False, 'args/replace_sampler_ddp': True, 'args/detect_anomaly': False, 'args/auto_scale_batch_size': False, 'args/prepare_data_per_node': 'None', 'args/plugins': 'None', 'args/amp_backend': 'native', 'args/amp_level': 'None', 'args/move_metrics_to_cpu': False, 'args/multiple_trainloader_mode': 'max_size_cycle', 'args/stochastic_weight_avg': False, 'args/terminate_on_nan': 'None', 'args/learning_rate': 0.0003, 'args/weight_decay': 0.0003, 'args/batch_size': 1, 'args/limit': 100, 'args/test_size': 0.15, 'num_classes': 10}
+2022-08-30 01:36:36,033 WARNING MsgRouterThr:1339 [router.py:message_loop():76] message_loop has been closed
