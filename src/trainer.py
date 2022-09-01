@@ -25,7 +25,7 @@ class EuroSATTrainer(pl.LightningModule):
 
 
         self.model = torchvision.models.resnet18(pretrained=True)
-        self.model.fc = nn.Sequential(nn.Linear(2048, num_classes),
+        self.model.fc = nn.Sequential(nn.Linear(512, num_classes),
                           nn.Softmax(dim=1))        
         
     def forward(self,x):
@@ -48,7 +48,7 @@ class EuroSATTrainer(pl.LightningModule):
         X, y = batch
         y_pred = self(X)
 
-        loss = F.mse_loss(y,y_pred)
+        loss = F.cross_entropy(input=y_pred,target=y)
 
         self.log('valid_loss', loss, on_epoch=True)
 
@@ -83,9 +83,9 @@ class EuroSATTrainer(pl.LightningModule):
         parser.add_argument('--learning_rate', type=float, default=3e-4)
         parser.add_argument('--weight_decay', type=float, default=3e-4)
         parser.add_argument('--batch_size', type=int,
-                            default=1)
+                            default=16)
         parser.add_argument('--limit', type=int,
-                        default=100)
+                        default=2000)
         parser.add_argument('--test_size', type=float,
                         default=.15)
         return parser

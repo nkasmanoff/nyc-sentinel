@@ -53,8 +53,7 @@ class EuroSATDataset(Dataset):
         img = self.X[idx]
         x = Image.open(img)
         x = preprocess(x)
-        y = torch.tensor([self.y[idx]])
-        category = self.label_dict[y.item()]
+        y = torch.tensor(self.y[idx])
         return x, y
     
     
