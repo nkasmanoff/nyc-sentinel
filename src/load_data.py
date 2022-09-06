@@ -46,7 +46,7 @@ class EuroSATDataset(Dataset):
                                    transforms.RandomVerticalFlip(),
                                    # normalization used on subset training data
                                    transforms.Normalize(mean=[0.3431, 0.3806, 0.4074], \
-                                                       std=[0.0036, 0.0028, 0.0029])])
+                                                       std=[0.0036, 0.0028, 0.0029])]) # TODO: eventually bigger sample size
         
 
 
@@ -85,4 +85,5 @@ def load_eurosat_dataset(limit=None):
     image_df = pd.DataFrame()
     image_df['path'] = paths
     image_df['label'] = labels
+    image_df = image_df.sample(frac = 1)
     return image_df, label_dict

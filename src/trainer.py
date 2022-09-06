@@ -1,3 +1,4 @@
+from sklearn.metrics import accuracy_score
 from load_data import get_eurosat_dataloaders
 import torchvision
 import torch
@@ -51,9 +52,22 @@ class EuroSATTrainer(pl.LightningModule):
         loss = F.cross_entropy(input=y_pred,target=y)
 
         self.log('valid_loss', loss, on_epoch=True)
-
+        
         return {'predicted': y_pred, 'truth': y, 'loss': loss}
-    
+
+    def validation_epoch_end(self, validation_step_outputs):
+        #y_pred = np.array([])
+       # y_true = np.array([])
+        #for out in validation_step_outputs:
+        #    y_pred = np.concatenate([y_pred,out['predicted'].cpu().numpy().argmax.flatten()])
+        #    y_true = np.concatenate([y_true,out['truth'].cpu().numpy().flatten()])
+
+
+        #acc_score = accuracy_score(y_pred,y_true)
+        #wandb.log({"chart": fig})
+
+        pass
+        
     def prepare_data(self):
         # the dataloaders are run batch by batch where this is run fully and once before beginning training
         self.train_loader, self.valid_loader = get_eurosat_dataloaders(batch_size=self.batch_size,
@@ -71,7 +85,7 @@ class EuroSATTrainer(pl.LightningModule):
     
     def configure_optimizers(self):
         optimizer =  torch.optim.Adam(self.parameters(), lr = self.learning_rate ,weight_decay = self.weight_decay)
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer,patience = 10)
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer,patience = 4)
         return  {"optimizer": optimizer, "lr_scheduler": scheduler, "monitor": "valid_loss"}
 
 
@@ -80,14 +94,14 @@ class EuroSATTrainer(pl.LightningModule):
 
         parser = ArgumentParser(parents=[parent_parser], add_help=False)
 
-        parser.add_argument('--learning_rate', type=float, default=3e-4)
+        parser.add_argument('--learning_rate', type=float, default=5e-3)
         parser.add_argument('--weight_decay', type=float, default=3e-4)
         parser.add_argument('--batch_size', type=int,
-                            default=16)
+                            default=32)
         parser.add_argument('--limit', type=int,
-                        default=2000)
+                        default=2500)
         parser.add_argument('--test_size', type=float,
-                        default=.15)
+                        default=.1)
         return parser
     
     
