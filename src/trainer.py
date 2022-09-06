@@ -63,7 +63,7 @@ class EuroSATTrainer(pl.LightningModule):
         
     def prepare_data(self):
         # the dataloaders are run batch by batch where this is run fully and once before beginning training
-        self.train_loader, self.valid_loader = get_eurosat_dataloaders(batch_size=self.batch_size,
+        self.train_loader, self.valid_loader, self.label_dict = get_eurosat_dataloaders(batch_size=self.batch_size,
                                                                                         limit = self.limit,
                                                                                         test_size = self.test_size)
 

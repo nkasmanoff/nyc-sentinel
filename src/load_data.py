@@ -27,7 +27,7 @@ def get_eurosat_dataloaders(batch_size,limit,test_size):
     train_loader = DataLoader(train_dataset,batch_size = batch_size,shuffle=True,num_workers = 4)
     valid_loader = DataLoader(train_dataset,batch_size = 4, num_workers=4)
 
-    return train_loader, valid_loader
+    return train_loader, valid_loader, label_dict
 
 class EuroSATDataset(Dataset):
     def __init__(self,X,y,label_dict):
