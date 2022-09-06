@@ -10,6 +10,7 @@ from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.callbacks import LearningRateMonitor
 import torch.nn as nn
 import torch.nn.functional as F
+import numpy as np
 from argparse import ArgumentParser
 
 class EuroSATTrainer(pl.LightningModule):
@@ -25,7 +26,7 @@ class EuroSATTrainer(pl.LightningModule):
         self.test_size = args.test_size
 
 
-        self.model = torchvision.models.resnet18(pretrained=True)
+        self.model = torchvision.models.resnet18(pretrained=False)
         self.model.fc = nn.Sequential(nn.Linear(512, num_classes),
                           nn.Softmax(dim=1))        
         
@@ -56,17 +57,18 @@ class EuroSATTrainer(pl.LightningModule):
         return {'predicted': y_pred, 'truth': y, 'loss': loss}
 
     def validation_epoch_end(self, validation_step_outputs):
-        #y_pred = np.array([])
-       # y_true = np.array([])
-        #for out in validation_step_outputs:
-        #    y_pred = np.concatenate([y_pred,out['predicted'].cpu().numpy().argmax.flatten()])
-        #    y_true = np.concatenate([y_true,out['truth'].cpu().numpy().flatten()])
+        y_pred = np.array([])
+        y_true = np.array([])
+        for out in validation_step_outputs:
+            y_pred = np.concatenate([y_pred,out['predicted'].cpu().numpy().argmax.flatten()])
+            y_true = np.concatenate([y_true,out['truth'].cpu().numpy().flatten()])
+        
+        print("Out looks like this: ", out)
+        print("Y_Pred: ", y_pred)
+        print("Y_True: ", y_true)
+        acc_score = accuracy_score(y_pred,y_true)
+        self.log('valid_acc', acc_score, on_epoch=True)
 
-
-        #acc_score = accuracy_score(y_pred,y_true)
-        #wandb.log({"chart": fig})
-
-        pass
         
     def prepare_data(self):
         # the dataloaders are run batch by batch where this is run fully and once before beginning training

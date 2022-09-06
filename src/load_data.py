@@ -45,11 +45,9 @@ class EuroSATDataset(Dataset):
                                    transforms.RandomHorizontalFlip(),
                                    transforms.RandomVerticalFlip(),
                                    # normalization used on subset training data
-                                   transforms.Normalize(mean=[0.3431, 0.3806, 0.4074], \
-                                                       std=[0.0036, 0.0028, 0.0029])]) # TODO: eventually bigger sample size
+                                   transforms.Normalize(mean=[0.485, 0.456, 0.406], \
+                                                       std=[0.229, 0.224, 0.225])]) # better mean and std from https://www.kaggle.com/code/maunish/eurosat-pytorch-train-effecientnet/notebook
         
-
-
         img = self.X[idx]
         x = Image.open(img)
         x = preprocess(x)
