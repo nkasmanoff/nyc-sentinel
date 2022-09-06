@@ -24,8 +24,6 @@ class EuroSATTrainer(pl.LightningModule):
         self.batch_size = args.batch_size
         self.limit = args.limit
         self.test_size = args.test_size
-
-
         self.model = torchvision.models.resnet18(pretrained=False)
         self.model.fc = nn.Sequential(nn.Linear(512, num_classes),
                           nn.Softmax(dim=1))        
@@ -35,37 +33,30 @@ class EuroSATTrainer(pl.LightningModule):
         return self.model(x)
 
     def training_step(self, batch, batch_idx):
+
         X, y = batch
-
         y_pred = self(X)
-
         loss = F.cross_entropy(input=y_pred,target=y)
-
         self.log('train_loss', loss, on_epoch=True)
-
         return loss
     
     # validation step
     def validation_step(self,batch,batch_idx):
+
         X, y = batch
         y_pred = self(X)
-
         loss = F.cross_entropy(input=y_pred,target=y)
-
         self.log('valid_loss', loss, on_epoch=True)
-        
         return {'predicted': y_pred, 'truth': y, 'loss': loss}
 
     def validation_epoch_end(self, validation_step_outputs):
         y_pred = np.array([])
         y_true = np.array([])
         for out in validation_step_outputs:
-            y_pred = np.concatenate([y_pred,out['predicted'].cpu().numpy().argmax.flatten()])
+
+            y_pred = np.concatenate([y_pred,out['predicted'].cpu().numpy().argmax(axis=1).flatten()])
             y_true = np.concatenate([y_true,out['truth'].cpu().numpy().flatten()])
         
-        print("Out looks like this: ", out)
-        print("Y_Pred: ", y_pred)
-        print("Y_True: ", y_true)
         acc_score = accuracy_score(y_pred,y_true)
         self.log('valid_acc', acc_score, on_epoch=True)
 
@@ -96,12 +87,12 @@ class EuroSATTrainer(pl.LightningModule):
 
         parser = ArgumentParser(parents=[parent_parser], add_help=False)
 
-        parser.add_argument('--learning_rate', type=float, default=5e-3)
+        parser.add_argument('--learning_rate', type=float, default=5e-4)
         parser.add_argument('--weight_decay', type=float, default=3e-4)
         parser.add_argument('--batch_size', type=int,
-                            default=32)
+                            default=64)
         parser.add_argument('--limit', type=int,
-                        default=2500)
+                        default=50)
         parser.add_argument('--test_size', type=float,
                         default=.1)
         return parser
@@ -141,12 +132,10 @@ def main():
 
     landclassifier = EuroSATTrainer(args,num_classes=10)
 
-    
     if args.auto_lr_find:
         trainer.tune(landclassifier)
 
     trainer.fit(landclassifier)
-    
     wandb.finish()
 
 

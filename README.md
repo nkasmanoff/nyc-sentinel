@@ -8,4 +8,4 @@ To start the container:
 
 To run the container (i.e. then head to jupyter notebook and code):
 
-## sudo docker run --runtime nvidia -it --rm --network host -v ~/nyc-sentinel:/home/noah/nyc-sentinel nsk367/nyc-sentinel
+## sudo docker run --runtime nvidia -it --rm --network host -v ~/Projects/nyc-sentinel:/home/noah/nyc-sentinel nsk367/nyc-sentinel
