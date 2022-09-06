@@ -78,7 +78,7 @@ class EuroSATTrainer(pl.LightningModule):
     
     def configure_optimizers(self):
         optimizer =  torch.optim.Adam(self.parameters(), lr = self.learning_rate ,weight_decay = self.weight_decay)
-        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer,patience = 4)
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer,patience = 3)
         return  {"optimizer": optimizer, "lr_scheduler": scheduler, "monitor": "valid_loss"}
 
 
@@ -92,7 +92,7 @@ class EuroSATTrainer(pl.LightningModule):
         parser.add_argument('--batch_size', type=int,
                             default=64)
         parser.add_argument('--limit', type=int,
-                        default=50)
+                        default=2000)
         parser.add_argument('--test_size', type=float,
                         default=.1)
         return parser
@@ -117,7 +117,7 @@ def main():
     early_stopping_callback = EarlyStopping(
                        monitor='valid_loss',
                        min_delta=0.00,
-                       patience=30,
+                       patience=5,
                        verbose=False,
                        mode='min'
                     )
