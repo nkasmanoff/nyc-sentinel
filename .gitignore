@@ -1,0 +1,16 @@
+*credentials.json
+*S2A
+*.ipynb_checkpoints
+*.Trash-0
+*.zip
+*.TIFF
+*.TIF
+*.SAFE
+*.tiff
+*.tif 
+*2750/
+*src/wandb
+*.json
+*.ckpt
+*.pyc
+*.jpg
