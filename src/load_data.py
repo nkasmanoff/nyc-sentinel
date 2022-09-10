@@ -41,16 +41,18 @@ class EuroSATDataset(Dataset):
     
     def __getitem__(self,idx):
         
+        
         preprocess = transforms.Compose([transforms.ToTensor(),
                                    transforms.RandomHorizontalFlip(),
-                                   transforms.RandomVerticalFlip(),
+                                   transforms.RandomVerticalFlip()])
                                    # normalization used on subset training data
-                                   transforms.Normalize(mean=[0.485, 0.456, 0.406], \
-                                                       std=[0.229, 0.224, 0.225])]) # better mean and std from https://www.kaggle.com/code/maunish/eurosat-pytorch-train-effecientnet/notebook
+                             #      transforms.Normalize(mean=[0.485, 0.456, 0.406], \
+                                                   #    std=[0.229, 0.224, 0.225])]) # better mean and std from https://www.kaggle.com/code/maunish/eurosat-pytorch-train-effecientnet/notebook
         
         img = self.X[idx]
         x = Image.open(img)
         x = preprocess(x)
+        x = (x - x.min()) / (x.max() - x.min())
         y = torch.tensor(self.y[idx])
         return x, y
     
