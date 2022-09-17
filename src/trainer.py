@@ -92,7 +92,7 @@ class EuroSATTrainer(pl.LightningModule):
         parser.add_argument('--batch_size', type=int,
                             default=64)
         parser.add_argument('--limit', type=int,
-                        default=2000)
+                        default=3000)
         parser.add_argument('--test_size', type=float,
                         default=.1)
         return parser
@@ -117,7 +117,7 @@ def main():
     early_stopping_callback = EarlyStopping(
                        monitor='valid_loss',
                        min_delta=0.00,
-                       patience=5,
+                       patience=3,
                        verbose=False,
                        mode='min'
                     )

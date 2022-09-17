@@ -7,6 +7,7 @@ from torch.utils.data import Dataset, DataLoader
 import tqdm
 from PIL import Image
 import pandas as pd
+import zipfile
 
 data_path = "/home/noah/nyc-sentinel/data/2750"
 def get_eurosat_dataloaders(batch_size,limit,test_size):
@@ -87,3 +88,22 @@ def load_eurosat_dataset(limit=None):
     image_df['label'] = labels
     image_df = image_df.sample(frac = 1)
     return image_df, label_dict
+
+
+def download_eurosat_data():
+    
+    os.system("wget http://madm.dfki.de/files/sentinel/EuroSAT.zip")
+    os.system('mv EuroSAT.zip data/')
+    zip_file = "data/EuroSAT.zip"
+
+    try: 
+        with zipfile.ZipFile(zip_file) as z:
+            z.extractall()  
+            os.system('mv 2750 data/')
+            os.system('rm data/EuroSAT.zip')
+        print("Extracted all")
+    except:
+        print("Invalid file")    
+            
+            
+    return
