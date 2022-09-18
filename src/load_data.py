@@ -13,42 +13,45 @@ data_path = "/home/noah/nyc-sentinel/data/2750"
 def get_eurosat_dataloaders(batch_size,limit,test_size):
     
     image_df, label_dict = load_eurosat_dataset(limit=limit)
-    
-    X_train, X_test, y_train, y_test = train_test_split(image_df['path'], image_df['label'], test_size=test_size)
+
+    X_train_valid, X_test, y_train_valid, y_test = train_test_split(image_df['path'], image_df['label'], test_size=test_size)
+    X_train, X_valid, y_train, y_valid = train_test_split(X_train_valid, y_train_valid, test_size=test_size)
 
     X_train.reset_index(drop=True,inplace=True)
     y_train.reset_index(drop=True,inplace=True)
     X_test.reset_index(drop=True,inplace=True)
     y_test.reset_index(drop=True,inplace=True)   
     
-    train_dataset = EuroSATDataset(X_train,y_train,label_dict)
-    valid_dataset = EuroSATDataset(X_test,y_test,label_dict)
+    train_dataset = EuroSATDataset(X_train,y_train,label_dict,randomize=True)
+    valid_dataset = EuroSATDataset(X_valid,y_valid,label_dict,randomize=False)
+    test_dataset = EuroSATDataset(X_test,y_test,label_dict,randomize=False)
 
 
     train_loader = DataLoader(train_dataset,batch_size = batch_size,shuffle=True,num_workers = 4)
-    valid_loader = DataLoader(train_dataset,batch_size = 4, num_workers=4)
+    valid_loader = DataLoader(valid_dataset,batch_size = 4, num_workers=4)
+    test_loader = DataLoader(test_dataset,batch_size = 4, num_workers=4)
 
-    return train_loader, valid_loader, label_dict
+    return train_loader, valid_loader, test_loader, label_dict
 
 class EuroSATDataset(Dataset):
-    def __init__(self,X,y,label_dict):
+    def __init__(self,X,y,label_dict,randomize=True):
     
         self.X = X
         self.y = y
         self.label_dict = label_dict
+        self.randomize = randomize
         
     def __len__(self):
         return len(self.X)
     
     def __getitem__(self,idx):
         
-        
-        preprocess = transforms.Compose([transforms.ToTensor(),
+        if self.randomize:
+            preprocess = transforms.Compose([transforms.ToTensor(),
                                    transforms.RandomHorizontalFlip(),
                                    transforms.RandomVerticalFlip()])
-                                   # normalization used on subset training data
-                             #      transforms.Normalize(mean=[0.485, 0.456, 0.406], \
-                                                   #    std=[0.229, 0.224, 0.225])]) # better mean and std from https://www.kaggle.com/code/maunish/eurosat-pytorch-train-effecientnet/notebook
+        else:
+            preprocess = transforms.Compose([transforms.ToTensor()])        
         
         img = self.X[idx]
         x = Image.open(img)

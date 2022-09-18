@@ -60,10 +60,30 @@ class EuroSATTrainer(pl.LightningModule):
         acc_score = accuracy_score(y_pred,y_true)
         self.log('valid_acc', acc_score, on_epoch=True)
 
+    
+    # validation step
+    def test_step(self,batch,batch_idx):
+
+        X, y = batch
+        y_pred = self(X)
+        loss = F.cross_entropy(input=y_pred,target=y)
+        self.log('test_loss', loss, on_epoch=True)
+        return {'predicted': y_pred, 'truth': y, 'loss': loss}        
+
+    def test_epoch_end(self, test_step_outputs):
+        y_pred = np.array([])
+        y_true = np.array([])
+        for out in test_step_outputs:
+
+            y_pred = np.concatenate([y_pred,out['predicted'].cpu().numpy().argmax(axis=1).flatten()])
+            y_true = np.concatenate([y_true,out['truth'].cpu().numpy().flatten()])
+        
+        acc_score = accuracy_score(y_pred,y_true)
+        self.log('test_acc', acc_score, on_epoch=True)
         
     def prepare_data(self):
         # the dataloaders are run batch by batch where this is run fully and once before beginning training
-        self.train_loader, self.valid_loader, self.label_dict = get_eurosat_dataloaders(batch_size=self.batch_size,
+        self.train_loader, self.valid_loader, self.test_loader, self.label_dict = get_eurosat_dataloaders(batch_size=self.batch_size,
                                                                                         limit = self.limit,
                                                                                         test_size = self.test_size)
 
@@ -74,7 +94,7 @@ class EuroSATTrainer(pl.LightningModule):
         return self.valid_loader
 
     def test_dataloader(self):
-        pass
+        return self.test_loader
     
     def configure_optimizers(self):
         optimizer =  torch.optim.Adam(self.parameters(), lr = self.learning_rate ,weight_decay = self.weight_decay)
