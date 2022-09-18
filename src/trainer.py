@@ -114,7 +114,7 @@ class EuroSATTrainer(pl.LightningModule):
         parser.add_argument('--limit', type=int,
                         default=3000)
         parser.add_argument('--test_size', type=float,
-                        default=.1)
+                        default=.15)
         return parser
     
     
