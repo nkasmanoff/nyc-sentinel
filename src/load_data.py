@@ -19,6 +19,8 @@ def get_eurosat_dataloaders(batch_size,limit,test_size):
 
     X_train.reset_index(drop=True,inplace=True)
     y_train.reset_index(drop=True,inplace=True)
+    X_valid.reset_index(drop=True,inplace=True)
+    y_valid.reset_index(drop=True,inplace=True)
     X_test.reset_index(drop=True,inplace=True)
     y_test.reset_index(drop=True,inplace=True)   
     

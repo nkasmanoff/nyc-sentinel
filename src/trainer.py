@@ -137,7 +137,7 @@ def main():
     early_stopping_callback = EarlyStopping(
                        monitor='valid_loss',
                        min_delta=0.00,
-                       patience=3,
+                       patience=5,
                        verbose=False,
                        mode='min'
                     )
@@ -156,6 +156,7 @@ def main():
         trainer.tune(landclassifier)
 
     trainer.fit(landclassifier)
+    trainer.test(ckpt_path="best")
     wandb.finish()
 
 
