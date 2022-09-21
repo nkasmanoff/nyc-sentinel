@@ -156,7 +156,7 @@ def main():
         trainer.tune(landclassifier)
 
     trainer.fit(landclassifier)
-    trainer.test(ckpt_path="best")
+    trainer.test()
     wandb.finish()
 
 
